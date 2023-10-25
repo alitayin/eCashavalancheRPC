@@ -1,12 +1,24 @@
 # eCashavalancheRPC
 
-# Documentation
-
-:-)
 
 ## Overview
 
-This document outlines the eCashRPC API endpoints for interacting with the Avalanche network. 
+This is an extremely minimal tool. allow u to use bitcoin-abc's avalanche cli via http api.
+If you want to bind it to your own node, 
+all you need to do is add the following to your node's `bitcoin.conf`:
+rpcuser=yourname
+rpcpassword=yourpassword
+rpcport=port
+rpcallowip=your.ip.address.here
+rpcbind=0.0.0.0
+server=1
+
+After this, you can simply clone the repository, install the dependencies, and start the application:
+npm install
+npm start
+
+
+This document outlines the eCashRPC API endpoints for interacting with the bitcoin-abc(alita's). 
 `http://ecashrpc.alitayin.com:3080`
 
 ## Endpoints
