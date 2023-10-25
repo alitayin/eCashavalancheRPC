@@ -4,7 +4,7 @@ const app = express();
 const port = 3080;
 const rateLimit = require("express-rate-limit");
 
-// 服务器 A 的 RPC 服务的 URL 和认证信息
+// Your RPC info
 const rpcURL = '';
 const rpcUser = '';
 const rpcPassword = '';
