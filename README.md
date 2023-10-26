@@ -104,6 +104,31 @@ Verifies an Avalanche proof.
 http://ecashrpc.alitayin.com:3080/verifyavalancheproof?proof=<proof>
 ```
 
+### `GET /getremoteproofs`
+
+Gets the list of remote proofs for the given node id.
+
+**Parameters:**
+- `nodeid` (numeric): The node identifier.
+
+**Example:**
+```
+http://ecashrpc.alitayin.com:3080/getremoteproofs?nodeid=<nodeid>
+```
+
+### `GET /getstakingreward`
+
+Returns the staking reward winner based on the previous block hash.
+
+**Parameters:**
+- `blockhash` (string): The previous block hash, hex encoded.
+- `recompute` (boolean, optional, default=false): Whether to recompute the staking reward winner if there is a cached value.
+
+**Example:**
+```
+http://ecashrpc.alitayin.com:3080/getstakingreward?blockhash=<blockhash>&recompute=<recompute>
+```
+
 ## Error Handling
 
 In case of an error, the API will respond with a HTTP status code `500` and a JSON object containing more details about what went wrong.
