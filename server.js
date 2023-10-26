@@ -166,7 +166,50 @@ app.get('/verifyavalancheproof', async (req, res) => {
   }
 });
 
+app.get('/getremoteproofs', async (req, res) => {
+  const nodeid = req.query.nodeid;
 
+  try {
+    const response = await axios.post(rpcURL, {
+      jsonrpc: '1.0',
+      id: 'curltest',
+      method: 'getremoteproofs',
+      params: [nodeid]
+    }, {
+      auth: {
+        username: rpcUser,
+        password: rpcPassword
+      }
+    });
+
+    res.send(response.data.result);
+  } catch (error) {
+    handleRPCError(error, res);
+  }
+});
+
+app.get('/getstakingreward', async (req, res) => {
+  const blockhash = req.query.blockhash;
+  const recompute = req.query.recompute;
+
+  try {
+    const response = await axios.post(rpcURL, {
+      jsonrpc: '1.0',
+      id: 'curltest',
+      method: 'getstakingreward',
+      params: [blockhash, recompute]
+    }, {
+      auth: {
+        username: rpcUser,
+        password: rpcPassword
+      }
+    });
+
+    res.send(response.data.result);
+  } catch (error) {
+    handleRPCError(error, res);
+  }
+});
 
 function handleRPCError(error, res) {
   if (error.response) {
