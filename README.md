@@ -137,7 +137,7 @@ Retrieves the status of the given proof, and validates each UTXO under it.
 This is not the native CLI of Bitcoin-ABC, but a hybrid endpoint.
 
 **Parameters:**
-- `proof` (string): The value of the proof.
+- `proof` (string)
 
 **Example:**
 ```
