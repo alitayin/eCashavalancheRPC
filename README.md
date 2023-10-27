@@ -127,6 +127,22 @@ Returns the staking reward winner based on the previous block hash.
 **Example:**
 ```
 http://ecashrpc.alitayin.com:3080/getstakingreward?blockhash=<blockhash>&recompute=<recompute>
+
+
+```
+
+### `GET /getproofstatus`
+
+Retrieves the status of the given proof, and validates each UTXO under it.
+This is not the native CLI of Bitcoin-ABC, but a hybrid endpoint.
+
+**Parameters:**
+- `proof` (string): The value of the proof.
+
+**Example:**
+```
+
+http://ecashrpc.alitayin.com:3080/getproofstatus?proof=<proof>
 ```
 
 ## Error Handling
