@@ -256,7 +256,7 @@ app.get('/getproofstatus', async (req, res) => {
         txid: stake.txid,
         vout: stake.vout,
         amount: stake.amount,
-        height: stake.height, // Added this line
+        height: stake.height, 
         address: stake.address,
         ecash: stake.ecash,
         status: status
