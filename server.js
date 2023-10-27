@@ -211,6 +211,63 @@ app.get('/getstakingreward', async (req, res) => {
   }
 });
 
+app.get('/getproofstatus', async (req, res) => {
+  const proof = req.query.proof;
+
+  try {
+    // First, decode the proof
+    const decodeResponse = await axios.post(rpcURL, {
+      jsonrpc: '1.0',
+      id: 'curltest',
+      method: 'decodeavalancheproof',
+      params: [proof]
+    }, {
+      auth: {
+        username: rpcUser,
+        password: rpcPassword
+      }
+    });
+
+    if (!decodeResponse.data.result || !decodeResponse.data.result.stakes) {
+      res.status(500).send('Invalid proof or no stakes found');
+      return;
+    }
+
+    // Then, validate each stake (UTXO)
+    const stakes = decodeResponse.data.result.stakes;
+    const results = [];
+    for (let i = 0; i < stakes.length; i++) {
+      const stake = stakes[i];
+      const txoutResponse = await axios.post(rpcURL, {
+        jsonrpc: '1.0',
+        id: 'curltest',
+        method: 'gettxout',
+        params: [stake.txid, stake.vout]
+      }, {
+        auth: {
+          username: rpcUser,
+          password: rpcPassword
+        }
+      });
+
+      const status = txoutResponse.data.result ? 'valid' : 'invalid';
+      results.push({
+        index: i + 1,
+        txid: stake.txid,
+        vout: stake.vout,
+        amount: stake.amount,
+        address: stake.address,
+        ecash: stake.ecash,
+        status: status
+      });
+    }
+
+    res.status(200).send(results);
+  } catch (error) {
+    handleRPCError(error, res);
+  }
+});
+
 function handleRPCError(error, res) {
   if (error.response) {
     res.status(500).send(error.response.data);
